@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Django Ajax CRUD Operation{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h4 class="text-center alert alert-danger">Django Function Based View Ajax Bootstrap CRUD Project</h4>
+    <div class="row">
+        <div class="col-sm-4">
+            <h5 class="text-center alert alert-info mt-3">Add/Update Student</h5>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="stuid" id="stuid">
+                {{form.as_p}}
+
+                <input type="button" class="btn btn-success" id="btnsave" value="Save">
+            </form>
+
+            <!-- Messages -->
+            <div id="msg" class="alert alert-danger mt-2" style="display: none;"></div>
+        </div>
+
+        <div class="col-sm-7">
+            <h4 class="text-center alert alert-info mt-3">Student Information</h4>
+
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+                  {% for st in stu %}
+                  <tr>
+                    <td scope="row">{{st.id}}</td>
+                    <td>{{st.name}}</td>
+                    <td>{{st.email}}</td>
+                    <td>{{st.password}}</td>
+                    <td>
+                        <input type="button" data-sid="{{st.id}}" class="btn btn-warning btn-sm btn-edit" value="Edit">
+                        <input type="button" data-sid="{{st.id}}" class="btn btn-danger btn-sm btn-del" value="Delete">
+                    </td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
